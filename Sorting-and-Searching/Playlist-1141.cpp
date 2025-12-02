@@ -6,17 +6,16 @@ void solve() {
   int n;
   cin >> n;
   map<int, int> mp;
-  int ans = 0, last = 1;
-  for (int i = 1; i <= n; i++) {
+  int ans = 0;
+  int last = -1;
+  for (int i = 0; i < n; i++) {
     int x;
     cin >> x;
-    if (mp[x] > last) {
-      ans = max(ans, i - mp[x] + 1);
-    } else {
-      ans = max(ans, i - last + 1);
+    if (mp.count(x)) {
+      last = max(last, mp[x]);
     }
-    if (mp[x] > last) last = mp[x];
-    mp[x] = i + 1;
+    ans = max(ans, i - last);
+    mp[x] = i;
   }
   cout << ans << '\n';
 }
